@@ -1,0 +1,76 @@
+
+@font-face {
+    font-family: "Cantarell-Regular";
+    src: url("Cantarell-Regular.ttf") format("truetype");
+}
+
+body {
+    font-family: "Cantarell-Regular", sans-serif;
+    background-color: #eeeeee;
+    margin: 1%;
+}
+
+header {
+    background-color: #333333;
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+main {
+    width: 80%;
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+section {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+img {
+    max-width: 100%;
+    width: 300px;
+    border-radius: 10px;
+    display: block;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+p {
+    font-size: 18px;
+    text-align: center;
+}
+
+h2 {
+    color: darkgreen;
+}
+
+nav a {
+    color: white;
+    background-color: #444444;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.5%;
+}
+nav{
+    padding: 10px;
+}
+
+@media (max-width: 999px){
+    nav{
+        font-size: larger;
+        text-align: center; 
+    }
+}
