@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kde ma nájdete | Ivan Laushkin</title>
+    <meta name="description" content="FEI STU a ďalšie miesta v Bratislave. Pridajte bod a zistite vzdušnú vzdialenosť.">
+    <meta property="og:title" content="Kde ma nájdete | Ivan Laushkin">
+    <meta property="og:description" content="FEI STU a ďalšie miesta v Bratislave. Pridajte bod a zistite vzdušnú vzdialenosť.">
+    <meta property="og:image" content="../img/me.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="sk_SK">
+    <link rel="icon" href="../favicon.png" type="image/png">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="../js/script.js" defer></script>
+
+</head>
+    <body>
+        <a class="skip-link" href="#main-content">Preskočiť na obsah</a>
+
+        <header>
+            <div class="container">
+                <a class="monogram" href="../index.html" aria-label="Ivan Laushkin — úvodná stránka">IL</a>
+                <div>
+                    <p class="name">Ivan Laushkin</p>
+                    <p class="slogan">Učím sa tvoriť weby, ktoré sú prehľadné a užitočné.</p>
+                </div>
+            </div>
+        </header>
+        
+        <nav class="site-nav" aria-label="Hlavná navigácia">
+            <div class="container">
+                <button class="menu-toggle" type="button" hidden aria-expanded="false" aria-controls="main-navigation"><span aria-hidden="true">☰ </span>Menu</button>
+                <ul id="main-navigation">
+                    <li><a href="../index.html">Profil</a></li>
+                    <li><a href="cv.html">Životopis</a></li>
+                    <li><a href="workspace.html">Pracovné prostredie</a></li>
+                    <li><a href="schedule.html">Rozvrh</a></li>
+                    <li><a href="map.html" aria-current="page">Kde ma nájdete</a></li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <main id="main-content" class="container">    	
+            <h1>Kde ma nájdete</h1>
+            <p>Študujem na FEI STU v Bratislave. Domov na mape uvádzam na fiktívnom mieste, aby som nezverejňoval presnú adresu.</p>
+
+            <section>
+                <h2>Moja škola a okolie</h2>
+                <p id="map-help">Nový bod na mape môžete pridať kliknutím alebo stlačením na mapu. Zadajte názov a kliknite na „Uložiť miesto“. Vyberte cieľ a kliknite na „Zobraziť vzdialenosť“. Pomocou klávesnice sa môžete presunúť na mapu pomocou klávesy Tab, pohybovať sa po nej pomocou šípok a pridať miesto v jej strede pomocou klávesy Enter</p>
+
+                <div id="map" role="region" tabindex="0" aria-label="Interaktívna mapa Bratislavy" aria-describedby="map-help"></div>
+
+                <form id="map-controls">
+                    <label>
+                        Pridaný bod
+                        <select name="point" disabled>
+                            <option value="">Zatiaľ nemáte žiadne body</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Cieľ
+                        <select name="destination">
+                            <option value="school">FEI STU</option>
+                            <option value="home">Domov - fiktívna poloha</option>
+                        </select>
+                    </label>
+
+                    <button type="submit" disabled>Zobraziť vzdialenosť</button>
+                </form>
+
+                <p id="map-status" role="status">Vyberiem miesto a cieľ.</p>
+            </section>
+
+            <section>
+                <h2>Zdroje mapy</h2>
+                <p>Používam podklady od <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> a knižnicu <a href="https://leafletjs.com/">Leaflet</a>.</p>
+            </section>
+        </main>
+
+
+        <footer>
+            <div class="container">
+                <div>
+                    <p><strong>Napíšte mi. Rád sa porozprávam.</strong></p>
+                    <address>
+                        <a href="mailto:laushkinivan1@gmail.com">laushkinivan1@gmail.com</a><span aria-hidden="true"> · </span><a href="tel:+421950546053">+421 950 546 053</a><br>
+                        Bratislava, Slovensko
+                    </address>
+                </div>
+                <div>
+                    <p>© 2026 Ivan Laushkin</p>
+                    <div>
+                    <a href="../img/me.jpg">Fotografia</a><a href="../img/workspace.jpg">Pracovné prostredie</a><a href="https://www.openstreetmap.org/copyright">Mapové podklady</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </body>
+</html>

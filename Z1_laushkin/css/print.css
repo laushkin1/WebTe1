@@ -1,0 +1,108 @@
+@media print {
+	@page {
+		size: A4;
+		margin: 10mm;
+	}
+
+	:root {
+		--color-text: #000;
+	}
+
+	* {
+		box-sizing: border-box;
+		color: var(--color-text) !important;
+		background: none !important;
+		box-shadow: none !important;
+	}
+
+	html,
+	body {
+		margin: 0;
+		font-size: 10pt;
+		line-height: 1.2;
+	}
+
+	body {
+		display: block;
+		min-height: 0;
+	}
+
+	body > header,
+	body > nav,
+	body > footer,
+	main > div,
+	.skip-link {
+		display: none !important;
+	}
+
+	.container {
+		width: 100%;
+		max-width: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.cv-columns {
+		display: grid;
+		grid-template-columns: 52mm 1fr;
+		gap: 6mm;
+		border: 0;
+		border-radius: 0;
+		overflow: visible;
+	}
+
+	.cv-columns > aside,
+	.cv-columns > div {
+		min-width: 0;
+		margin: 0;
+		padding: 0;
+	}
+
+	.cv-columns img {
+		display: block;
+		width: 35mm;
+		height: auto;
+		margin: 0 0 3mm;
+	}
+
+	.cv-columns h2 {
+		font-size: 12pt;
+		margin: 6mm 0 2mm;
+	}
+
+	.cv-columns h3 {
+		font-size: 10pt;
+		margin: 0 0 1mm;
+	}
+
+	#cv-name {
+		font-size: 18pt;
+	}
+
+	.cv-columns p,
+	.cv-columns ul,
+	.cv-columns dl {
+		margin: 0 0 2mm;
+	}
+
+	.cv-columns ul {
+		padding-left: 4mm;
+	}
+
+	.cv-columns section + section {
+		margin-top: 3mm;
+	}
+
+	.cv-columns address {
+		font-style: normal;
+	}
+
+	.cv-columns dl > div {
+		display: flex;
+		gap: 2mm;
+	}
+
+	.cv-columns dd {
+		margin: 0;
+	}
+}

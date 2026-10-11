@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil | Ivan Laushkin</title>
+    <meta name="description" content="Kto som a na čom pracujem. Som Ivan Laushkin, študent aplikovanej informatiky na FEI STU.">
+    <meta property="og:title" content="Profil | Ivan Laushkin">
+    <meta property="og:description" content="Kto som a na čom pracujem. Som Ivan Laushkin, študent aplikovanej informatiky na FEI STU.">
+    <meta property="og:image" content="img/me.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="sk_SK">
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+</head>
+    <body>
+        <a class="skip-link" href="#main-content">Preskočiť na obsah</a>
+
+        <header>
+            <div class="container">
+                <a class="monogram" href="index.html" aria-label="Ivan Laushkin — úvodná stránka">IL</a>
+                <div>
+                    <p class="name">Ivan Laushkin</p>
+                    <p class="slogan">Učím sa tvoriť weby, ktoré sú prehľadné a užitočné.</p>
+                </div>
+            </div>
+        </header>
+        <nav class="site-nav" aria-label="Hlavná navigácia">
+            <div class="container">
+                <button class="menu-toggle" type="button" hidden aria-controls="main-navigation" aria-expanded="false"><span aria-hidden="true">☰ </span>Menu</button>
+                <ul id="main-navigation">
+                    <li><a href="index.html" aria-current="page">Profil</a></li>
+                    <li><a href="pages/cv.html">Životopis</a></li>
+                    <li><a href="pages/workspace.html">Pracovné prostredie</a></li>
+                    <li><a href="pages/schedule.html">Rozvrh</a></li>
+                    <li><a href="pages/map.html">Kde ma nájdete</a></li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <main id="main-content" class="container">
+            <img class="profile-photo" src="img/me.jpg" alt="Môj portrét — Ivan Laushkin" width="2476" height="3303" loading="lazy">
+
+            <article class="profile-intro" aria-labelledby="profile-title">
+                <h1 id="profile-title">Som Ivan.<br><span>Tvorím webové aplikácie.</span></h1>
+
+                <div>
+                    <p>Študujem aplikovanú informatiku na FEI STU v Bratislave a zameriavam sa na vývoj backendu v Pythone a Djangu.</p>
+                    <p>Keď práve nesedím za kódom, snažím sa žiť aktívne. Pravidelne cvičím v posilňovni, čo mi pomáha skvelo vyvážiť sedavý životný štýl pri počítači a vyčistiť si myseľ. Okrem toho veľmi rád trávim čas v kuchyni - varenie je pre mňa formou relaxu, kde si rád pripravujem vlastné jedlá a z času na čas experimentujem s novými receptami.</p>
+                </div>
+                <div>
+                    <a class="button" href="pages/cv.html">Pozrieť môj životopis <span aria-hidden="true">↗</span></a>
+                    <a class="button button-secondary" href="https://github.com/laushkin1">Moje projekty na GitHube</a>
+                </div>
+            </article>
+
+            <div>
+                <section class="card" aria-labelledby="skills-title">
+                    <p class="eyebrow">Na čom staviam</p>
+                    <h2 id="skills-title">Tri kľúčové zručnosti</h2>
+                    <ul class="key-skills">
+                        <li><strong>Python</strong><span>Logika a REST API</span></li>
+                        <li><strong>Django</strong><span>Webové aplikácie</span></li>
+                        <li><strong>PostgreSQL</strong><span>Relačné databázy</span></li>
+                    </ul>
+                </section>
+                <aside class="card motto" aria-labelledby="motto-title">
+                    <h2 id="motto-title" class="eyebrow">Moje motto</h2>
+                    <blockquote>„Nezlyhal som.<br>Len som našiel 10 000 spôsobov, ktoré nefungujú.“</blockquote>
+                    <p>Thomas Alva Edison (1847-1931) americký vynálezca a podnikateľ.</p>
+                </aside>
+            </div>
+        </main>
+
+
+        <footer>
+            <div class="container">
+                <div>
+                    <p><strong>Napíšte mi. Rád sa porozprávam.</strong></p>
+                    <address>
+                        <a href="mailto:laushkinivan1@gmail.com">laushkinivan1@gmail.com</a><span aria-hidden="true"> · </span><a href="tel:+421950546053">+421 950 546 053</a><br>
+                        Bratislava, Slovensko
+                    </address>
+                </div>
+                <div>
+                    <p>© 2026 Ivan Laushkin</p>
+                    <div>
+                    <a href="img/me.jpg">Fotografia</a><a href="img/workspace.jpg">Pracovné prostredie</a><a href="https://www.openstreetmap.org/copyright">Mapové podklady</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </body>
+</html>
