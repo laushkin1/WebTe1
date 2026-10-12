@@ -58,8 +58,9 @@
                 <form id="map-controls">
                     <label>
                         Pridaný bod
-                        <select name="point" disabled>
-                            <option value="">Zatiaľ nemáte žiadne body</option>
+                        <select name="point">
+                            <option value="school">FEI STU</option>
+                            <option value="home">Domov - ŠD Mladosť</option>
                         </select>
                     </label>
 
@@ -67,11 +68,11 @@
                         Cieľ
                         <select name="destination">
                             <option value="school">FEI STU</option>
-                            <option value="home">Domov - fiktívna poloha</option>
+                            <option value="home">Domov - ŠD Mladosť</option>
                         </select>
                     </label>
 
-                    <button type="submit" disabled>Zobraziť vzdialenosť</button>
+                    <button type="submit">Zobraziť vzdialenosť</button>
                 </form>
 
                 <p id="map-status" role="status">Vyberiem miesto a cieľ.</p>

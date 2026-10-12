@@ -824,6 +824,12 @@ progress {
 	color: var(--color-accent);
 }
 
+#map .leaflet-popup-content{
+	width: max-content;
+    max-width: calc(100vw - 150px);
+    overflow-wrap: anywhere;
+}
+
 #map .leaflet-popup-content p {
 	margin: 0;
 }

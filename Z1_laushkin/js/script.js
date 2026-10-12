@@ -339,17 +339,26 @@ function initializeMap() {
 		return;
 	}
 
-	const destinations = {
-		school: { name: "FEI STU", lat: 48.151965, lng: 17.072995 },
-		home: { name: "Domov - fiktívna poloha", lat: 48.1605, lng: 17.0515 }
-	};
-
 	const storageKey = "laushkin-map-points";
-	let points = [];
+
+	const points = [
+		{
+			id: "school",
+			name: "FEI STU",
+			lat: 48.151965,
+			lng: 17.072995
+		},
+		{
+			id: "home",
+			name: "Domov - ŠD Mladosť",
+			lat: 48.15927,
+			lng: 17.06416
+		}
+	];
+
 	let storageMessage = "";
 	let line = null;
-	const markers = [];
-	const destinationMarkers = {};
+	const markers = new Map();
 
 	try {
 		const savedPoints = JSON.parse(localStorage.getItem(storageKey) || "[]");
@@ -363,7 +372,15 @@ function initializeMap() {
 			throw new Error("Invalid saved map points");
 		}
 
-		points = savedPoints;
+		for (const savedPoint of savedPoints) {
+			if (savedPoint.id === "school" || savedPoint.id === "home") {
+				continue;
+			}
+
+			savedPoint.id = "point-" + points.length;
+			points.push(savedPoint);
+		}
+
 	} catch {
 		storageMessage = "Uložené body sa mi nepodarilo načítať. Môžete pridať nové body.";
 	}
@@ -382,14 +399,6 @@ function initializeMap() {
 		return paragraph;
 	}
 
-	for (const key of Object.keys(destinations)) {
-		const destination = destinations[key];
-		destinationMarkers[key] = L.marker([destination.lat, destination.lng], {
-			title: destination.name,
-			alt: destination.name
-		}).addTo(map).bindPopup(createPopup(`${destination.name}\n${destination.lat.toFixed(5)}°, ${destination.lng.toFixed(5)}°`));
-	}
-
 	function getMapDistance(start, end) {
 		const radians = Math.PI / 180;
 		const latitudeDifference = (end.lat - start.lat) * radians;
@@ -403,65 +412,101 @@ function initializeMap() {
 	}
 
 	function showDistance() {
+		const start = points.find(
+			(point) => point.id === form.elements.point.value
+		);
 
-		const point = points[Number(form.elements.point.value)];
-		const destination = destinations[form.elements.destination.value];
-		const distance = getMapDistance(point, destination).toFixed(2);
+		const end = points.find(
+			(point) => point.id === form.elements.destination.value
+		);
 
-		status.textContent =`${point.name} → ${destination.name}:\n${distance} km vzdušnou čiarou. ${storageMessage}`;
-		status.style.whiteSpace = "pre-line";
-
-		if (line) map.removeLayer(line);
-
-		line = L.polyline([
-			[point.lat, point.lng],
-			[destination.lat, destination.lng]
-		], {
-			color: getComputedStyle(document.documentElement).getPropertyValue("--color-background").trim(), 
-			weight: 4, 
-			dashArray: "8, 6"
-		}).addTo(map);
-
-		markers.forEach((marker, index) => {
-			const markerPoint = points[index];
-			marker.bindPopup(createPopup(`${markerPoint.name}\n${markerPoint.lat.toFixed(5)}°, ${markerPoint.lng.toFixed(5)}°`));
-		});
-
-		for (const key of Object.keys(destinations)) {
-			const markerDestination = destinations[key];
-			destinationMarkers[key].bindPopup(createPopup(`${markerDestination.name}\n${markerDestination.lat.toFixed(5)}°, ${markerDestination.lng.toFixed(5)}°`));
+		if (!start || !end) {
+			status.textContent = "Vyberte začiatočný bod a cieľ.";
+			return;
 		}
 
-		markers[Number(form.elements.point.value)].bindPopup(
-			createPopup(`${destination.name} → ${point.name}:\n${distance} km vzdušnou čiarou.`)
-		);
+		const distance = getMapDistance(start, end).toFixed(2);
 
-		destinationMarkers[form.elements.destination.value].bindPopup(
-			createPopup(`${point.name} → ${destination.name}:\n${distance} km vzdušnou čiarou.`)
+		const route =
+			`${start.name} → ${end.name}:\n` +
+			`${distance} km vzdušnou čiarou.`;
 
-		);
+		status.textContent = `${route} ${storageMessage}`;
+		status.style.whiteSpace = "pre-line";
 
+		if (line) {
+			map.removeLayer(line);
+			line = null;
+		}
 
-		map.fitBounds(line.getBounds(), { padding: [30, 30], maxZoom: 15 });
-		destinationMarkers[form.elements.destination.value].openPopup();
+		points.forEach((point) => {
+			let text =
+				`${point.name}\n` +
+				`${point.lat.toFixed(5)}°, ${point.lng.toFixed(5)}°`;
+
+			if (point.id === start.id || point.id === end.id) {
+				text = 
+					`${point.name}\n` + 
+					`${route}`;
+			}
+
+			markers.get(point.id).bindPopup(createPopup(text));
+		});
+
+		if (start.id !== end.id) {
+			line = L.polyline([
+				[start.lat, start.lng],
+				[end.lat, end.lng]
+			], {
+				color: getComputedStyle(document.documentElement).getPropertyValue("--color-background").trim(),
+				weight: 4,
+				dashArray: "8, 6"
+			}).addTo(map);
+
+			map.fitBounds(line.getBounds(), {
+				padding: [30, 30],
+				maxZoom: 15
+			});
+		} else {
+			map.panTo([end.lat, end.lng]);
+		}
+
+		markers.get(end.id).openPopup();
 	}
 
 	function showPoint(point) {
 		const marker = L.marker([point.lat, point.lng], {
 			title: point.name,
 			alt: point.name
-		}).addTo(map).bindPopup(createPopup(`${point.name}\n${point.lat.toFixed(5)}°, ${point.lng.toFixed(5)}°`));
+		})
+			.addTo(map)
+			.bindPopup(createPopup(
+				`${point.name}\n` +
+				`${point.lat.toFixed(5)}°, ${point.lng.toFixed(5)}°`
+			));
 
-		markers.push(marker);
-		form.elements.point.add(new Option(point.name, markers.length - 1));
+		markers.set(point.id, marker);
+
+		form.elements.point.add(
+			new Option(point.name, point.id)
+		);
+
+		form.elements.destination.add(
+			new Option(point.name, point.id)
+		);
 	}
 
-	if (points.length) {
-		form.elements.point.replaceChildren();
-		points.forEach(showPoint);
-		form.elements.point.disabled = false;
-		form.querySelector("button").disabled = false;
-	}
+	form.elements.point.replaceChildren();
+	form.elements.destination.replaceChildren();
+
+	points.forEach(showPoint);
+
+	// form.elements.point.disabled = false;
+	// form.elements.destination.disabled = false;
+	// form.querySelector("button").disabled = false;
+
+	form.elements.point.value = "home";
+	form.elements.destination.value = "school";
 
 	function addPoint(coordinates) {
 		const location = coordinates.wrap();
@@ -505,15 +550,17 @@ function initializeMap() {
 
 			temporaryMarker.closePopup();
 
-			if (!points.length) form.elements.point.replaceChildren();
+			const point = {
+				id: "point-" + points.length,
+				name,
+				lat: location.lat,
+				lng: location.lng
+			};
 
-			const point = { name, lat: location.lat, lng: location.lng };
 			points.push(point);
 			showPoint(point);
 
-			form.elements.point.disabled = false;
-			form.elements.point.value = String(points.length - 1);
-			form.querySelector("button").disabled = false;
+			form.elements.point.value = point.id;
 
 			try {
 				localStorage.setItem(storageKey, JSON.stringify(points));
@@ -539,7 +586,7 @@ function initializeMap() {
 
 		temporaryMarker.bindPopup(popupForm, {
 			minWidth: 200,
-			maxWidth: 260
+			maxWidth: 320
 		});
 
 		temporaryMarker.on("popupopen", () => {
